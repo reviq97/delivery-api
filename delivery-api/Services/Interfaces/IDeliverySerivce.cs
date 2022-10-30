@@ -1,9 +1,11 @@
 ﻿using delivery_api.Enitty;
+using delivery_api.Models;
 
 namespace delivery_api.Services.Interfaces
 {
-    internal interface ICourierSerivce
+    public interface IDeliveryService
     {
         Delivery GetDelivery(string deliveryId);
+        Delivery PostDelivery(DeliveryDto deliveryDto);
     }
 }

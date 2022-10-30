@@ -7,9 +7,7 @@ namespace delivery_api.Enitty
         [Required]
         [Key]
         public string DeliveryId { get; set; }
-
         public string? CourierId { get; set; }
-        public Courier Courier { get; set; }
         [Required]
         public string SenderId { get; set; }
         [Required]
@@ -18,6 +16,6 @@ namespace delivery_api.Enitty
         public string DeliveryDetails { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         [Required]
-        public DateTime ArriveTime { get; set; }
+        public DateTime? ArriveTime { get; set; }
     }
 }

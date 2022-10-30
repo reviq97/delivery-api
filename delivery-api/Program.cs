@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CourierDb")));
-builder.Services.AddScoped<ICourierSerivce, CourierService>();
+builder.Services.AddScoped<IDeliveryService, DeliveryService>();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -31,4 +31,5 @@ app.MapControllers();
 
 app.Run();
 
+//TODO:Add logic to customer service (postcustomer) 
 

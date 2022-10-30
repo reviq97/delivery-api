@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace delivery_api.Enitty
 {
@@ -10,7 +9,6 @@ namespace delivery_api.Enitty
         public string CourierId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-
         [MaxLength(11)]
         [RegularExpression("([0-9]+", ErrorMessage = "Please enter valid number")]
         private string _pesel;
