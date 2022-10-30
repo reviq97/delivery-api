@@ -22,10 +22,7 @@ namespace delivery_api.Controllers
         {
             var delivery = _deliveryService.GetDelivery(deliveryId);
 
-            if(delivery == null)
-            {
-                throw new Exception("Delivery not found");
-            }
+            if (delivery is null) return NotFound("There isn't such delivery with given delivery id");
 
             return Ok(delivery);
         }

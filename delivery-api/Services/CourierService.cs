@@ -15,7 +15,7 @@ namespace delivery_api.Services
 
         public Delivery GetDelivery(string deliveryId)
         {
-            return null;
+            return _dbContext.Deliveries.FirstOrDefault(x => x.DeliveryId == deliveryId);
         }
     }
 }
