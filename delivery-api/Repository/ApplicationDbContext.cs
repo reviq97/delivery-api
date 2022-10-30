@@ -8,7 +8,10 @@ namespace delivery_api.Repository
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+
         }
+
+        
 
         public DbSet<Delivery> Deliveries { get; set; }
         public DbSet<Courier> Couriers { get; set; }
