@@ -9,13 +9,12 @@ namespace delivery_api.Enitty
         public string DeliveryId { get; set; }
         public string? CourierId { get; set; }
         [Required]
-        public string SenderId { get; set; }
+        public string SenderMail { get; set; }
         [Required]
-        public string RecipientId { get; set; }
+        public string RecipientMail { get; set; }
         [Required]
         public string DeliveryDetails { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
-        [Required]
         public DateTime? ArriveTime { get; set; }
     }
 }

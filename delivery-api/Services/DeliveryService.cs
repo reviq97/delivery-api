@@ -2,21 +2,31 @@
 using delivery_api.Models;
 using delivery_api.Repository;
 using delivery_api.Services.Interfaces;
+using System.Linq;
 
 namespace delivery_api.Services
 {
     public class DeliveryService : IDeliveryService
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly ICustomerService _customerService;
 
-        public DeliveryService(ApplicationDbContext dbContext)
+        public DeliveryService(ApplicationDbContext dbContext, ICustomerService customerService)
         {
+            _customerService = customerService;
             _dbContext = dbContext;
         }
 
         public Delivery GetDelivery(string deliveryId)
         {
-            return _dbContext.Deliveries.FirstOrDefault(x => x.DeliveryId == deliveryId);
+            var delivery =_dbContext.Deliveries.FirstOrDefault(x => x.DeliveryId == deliveryId);
+
+            if(delivery is not null)
+            {
+                return delivery;
+            }
+
+            throw new Exception("Delivery not found");
         }
 
         public Delivery PostDelivery(DeliveryDto deliveryDto)
@@ -24,20 +34,32 @@ namespace delivery_api.Services
             var delivery = new Delivery()
             {
                 DeliveryId = Guid.NewGuid().ToString(),
-                SenderId = deliveryDto.SenderId,
-                RecipientId = deliveryDto.RecipientId,
-                DeliveryDetails = deliveryDto.DeliveryDetails
+                CourierId = null,
+                SenderMail = deliveryDto.Sender.Email,
+                RecipientMail = deliveryDto.Recipient.Email,
+                DeliveryDetails = deliveryDto.DeliveryDetails,
+                CreatedDate = deliveryDto.CreatedDate,
+                ArriveTime = null,
             };
 
-            if (_dbContext.Deliveries.Contains(delivery))
+            _dbContext.Deliveries.Add(delivery);
+
+            var sender = deliveryDto.Sender.Email;
+            var recipient = deliveryDto.Recipient.Email;
+
+            if (!_dbContext.Customers.Any(x => x.Email == sender))
             {
-                throw new Exception("Already exists delivery with that id");
+                _customerService.PostCustomer(deliveryDto.Sender);
             }
 
-            _dbContext.Deliveries.Add(delivery);
-            _dbContext.SaveChanges();
+            if(!_dbContext.Customers.Any(x => x.Email == recipient))
+            {
+                _customerService.PostCustomer(deliveryDto.Recipient);
+            }
 
+            _dbContext.SaveChanges();
             return delivery;
+            
         }
     }
 }

@@ -7,12 +7,12 @@ namespace delivery_api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DeliveryService : ControllerBase
+    public class DeliveryController : ControllerBase
     {
-        private readonly ILogger<DeliveryService> _logger;
+        private readonly ILogger<DeliveryController> _logger;
         private readonly IDeliveryService _courierService;
 
-        public DeliveryService(ILogger<DeliveryService> logger, IDeliveryService deliveryService)
+        public DeliveryController(ILogger<DeliveryController> logger, IDeliveryService deliveryService)
         {
             _logger = logger;
             _courierService = deliveryService;

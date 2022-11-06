@@ -1,27 +1,28 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 
-namespace delivery_api.Enitty
+namespace delivery_api.Models
 {
-    public class Customer
+    public class CustomerDto
     {
         private string _postalCode;
-        [Required]
-        [Key]
-        public string CustomerId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public string Surname { get; set; }
         [Required]
+        public string Email { get; set; }
+        [Required]
         public string Street { get; set; }
         [Required]
+        [MinLength(5)]
         [MaxLength(6)]
-        [DataType(DataType.PostalCode)]
-        public string PostalCode 
+        public string PostalCode
         {
             get { return _postalCode; }
-            set { _postalCode = string.Format("{0:##-###}", int.Parse(value)); }
+            set
+            {
+                _postalCode = $"{value[0]}{value[1]}-{value[2]}{value[3]}{value[4]}";
+            }
         }
         [Required]
         public string City { get; set; }

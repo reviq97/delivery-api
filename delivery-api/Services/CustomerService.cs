@@ -1,4 +1,5 @@
 ﻿using delivery_api.Enitty;
+using delivery_api.Models;
 using delivery_api.Repository;
 using delivery_api.Services.Interfaces;
 
@@ -13,27 +14,41 @@ namespace delivery_api.Services
             _dbContext = dbContext;
         }
 
-        public Customer GetCustomer(string id)
+        public Customer GetCustomer(string mail)
         {
-            var customer = _dbContext.Customers.FirstOrDefault(x => x.CustomerId == id);
+            var customer = _dbContext.Customers.FirstOrDefault(x => x.Email == mail);
 
             if(customer is null)
             {
-                throw new Exception("Customer not found with given id");
+                throw new Exception("Customer not found with given mail");
             }
 
             return customer;
         }
 
-        public void PostCustomer(Customer customer)
+        public void PostCustomer(CustomerDto customerDto)
         {
-            if(GetCustomer(customer.CustomerId) is null)
+            var customer = _dbContext.Customers.FirstOrDefault(x => x.Email == customerDto.Email);
+
+            if (customer is not null)
             {
-                throw new Exception("Customer already exist");
+                throw new Exception("Customer already exists");
             }
 
-            _dbContext.Customers.Add(customer);
+            var newCustomer = new Customer()
+            {
+                CustomerId = Guid.NewGuid().ToString(),
+                Name = customerDto.Name,
+                Surname = customerDto.Surname,
+                City = customerDto.City,
+                Email = customerDto.Email,
+                Street = customerDto.Street,
+                PostalCode = customerDto.PostalCode,
+            };
+
+            _dbContext.Customers.Add(newCustomer);
             _dbContext.SaveChanges();
+
         }
     }
 }

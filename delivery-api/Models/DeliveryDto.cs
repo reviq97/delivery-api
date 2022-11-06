@@ -1,11 +1,13 @@
-﻿namespace delivery_api.Models
+﻿using delivery_api.Enitty;
+using System.ComponentModel.DataAnnotations;
+
+namespace delivery_api.Models
 {
     public class DeliveryDto
     {
-        public string SenderId { get; set; }
-        public string RecipientId { get; set; }
+        public CustomerDto Sender { get; set; }
+        public CustomerDto Recipient { get; set; }
         public string DeliveryDetails { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public DateTime? ArriveTime { get; set; }
     }
 }

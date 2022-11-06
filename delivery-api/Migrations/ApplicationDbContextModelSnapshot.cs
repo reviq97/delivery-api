@@ -53,6 +53,10 @@ namespace delivery_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -80,11 +84,11 @@ namespace delivery_api.Migrations
                     b.Property<string>("DeliveryId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("ArriveTime")
+                    b.Property<DateTime?>("ArriveTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CourierId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -93,28 +97,17 @@ namespace delivery_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RecipientId")
+                    b.Property<string>("RecipientMail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SenderId")
+                    b.Property<string>("SenderMail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DeliveryId");
 
-                    b.HasIndex("CourierId");
-
                     b.ToTable("Deliveries");
-                });
-
-            modelBuilder.Entity("delivery_api.Enitty.Delivery", b =>
-                {
-                    b.HasOne("delivery_api.Enitty.Courier", "Courier")
-                        .WithMany()
-                        .HasForeignKey("CourierId");
-
-                    b.Navigation("Courier");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
 ﻿using delivery_api.Enitty;
+using delivery_api.Models;
 using delivery_api.Services;
 using delivery_api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -30,10 +31,11 @@ namespace delivery_api.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostCustomer([FromBody] Customer customer)
+        public ActionResult PostCustomer([FromBody] CustomerDto customer)
         {
+            _customerService.PostCustomer(customer);
 
-            return null;
+            return Ok();
         }
     }
 }

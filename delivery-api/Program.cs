@@ -12,6 +12,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CourierDb")));
 builder.Services.AddScoped<IDeliveryService, DeliveryService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ICourierService, CourierService>();
+
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
