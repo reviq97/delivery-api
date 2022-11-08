@@ -1,4 +1,5 @@
 ﻿using delivery_api.Enitty;
+using delivery_api.Entities;
 
 namespace delivery_api.Services.Interfaces
 {
@@ -6,5 +7,6 @@ namespace delivery_api.Services.Interfaces
     {
         Courier GetCourier(string courierPesel);
         Courier CreateCourier(Courier courier);
+        CourierDeliveries GetCourierDeliveries(string courierId);
     }
 }

@@ -5,7 +5,7 @@ namespace delivery_api.Services.Interfaces
 {
     public interface ICustomerService
     {
-        Customer GetCustomer(string id);
+        Customer GetCustomerByMail(string mail);
         void PostCustomer(CustomerDto customer);
 
     }

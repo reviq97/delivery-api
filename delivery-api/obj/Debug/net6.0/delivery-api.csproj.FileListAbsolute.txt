@@ -60,3 +60,6 @@ C:\Users\User\source\repos\delivery-api\delivery-api\obj\Debug\net6.0\refint\del
 C:\Users\User\source\repos\delivery-api\delivery-api\obj\Debug\net6.0\delivery-api.pdb
 C:\Users\User\source\repos\delivery-api\delivery-api\obj\Debug\net6.0\delivery-api.genruntimeconfig.cache
 C:\Users\User\source\repos\delivery-api\delivery-api\obj\Debug\net6.0\ref\delivery-api.dll
+C:\Users\User\source\repos\delivery-api\delivery-api\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\User\source\repos\delivery-api\delivery-api\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\User\source\repos\delivery-api\delivery-api\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll

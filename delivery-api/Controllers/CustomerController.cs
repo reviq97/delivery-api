@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace delivery_api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CustomerController : ControllerBase
     {
 
@@ -21,9 +21,9 @@ namespace delivery_api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<Customer> GetCustomerById(string customerId)
+        public ActionResult<Customer> GetCustomerByMail([FromQuery]string mail)
         {
-            var customer = _customerService.GetCustomer(customerId);
+            var customer = _customerService.GetCustomerByMail(mail);
 
             if (customer is null) return NotFound("There isn't such customer with given customer id");
 
@@ -35,7 +35,7 @@ namespace delivery_api.Controllers
         {
             _customerService.PostCustomer(customer);
 
-            return Ok();
+            return Created(string.Empty, customer);
         }
     }
 }

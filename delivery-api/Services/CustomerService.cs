@@ -14,7 +14,7 @@ namespace delivery_api.Services
             _dbContext = dbContext;
         }
 
-        public Customer GetCustomer(string mail)
+        public Customer GetCustomerByMail(string mail)
         {
             var customer = _dbContext.Customers.FirstOrDefault(x => x.Email == mail);
 

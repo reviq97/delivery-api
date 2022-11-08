@@ -1,4 +1,5 @@
 ﻿using delivery_api.Enitty;
+using delivery_api.Entities;
 using delivery_api.Repository;
 using delivery_api.Services.Interfaces;
 
@@ -34,6 +35,26 @@ namespace delivery_api.Services
             throw new Exception("Courier already exists in database");
 
         }
-        
+
+        public CourierDeliveries GetCourierDeliveries(string courierId)
+        {
+            var listOfDeliveries = _dbContext.Deliveries.ToList();
+            var courierDeliveries = _dbContext.Couriers.Where(x => x.CourierId == courierId)
+                    .Join(listOfDeliveries,
+                    cId => cId.CourierId,
+                    dId => dId.CourierId,
+                    (courier, delivery) => new CourierDeliveries
+                    {
+                        CourierId = courier.CourierId,
+                        CourierName = courier.Name,
+                        CourierSurname = courier.Surname,
+                        Deliveries = listOfDeliveries
+                    }).FirstOrDefault();
+
+            return courierDeliveries ?? new CourierDeliveries
+            {
+                CourierId = courierId,
+            };
+        }
     }
 }

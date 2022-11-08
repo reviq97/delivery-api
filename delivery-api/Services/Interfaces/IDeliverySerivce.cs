@@ -7,5 +7,6 @@ namespace delivery_api.Services.Interfaces
     {
         Delivery GetDelivery(string deliveryId);
         Delivery PostDelivery(DeliveryDto deliveryDto);
+        IEnumerable<Delivery> GetAllDeliveries();
     }
 }

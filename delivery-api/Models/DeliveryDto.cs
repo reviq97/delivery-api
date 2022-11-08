@@ -5,9 +5,13 @@ namespace delivery_api.Models
 {
     public class DeliveryDto
     {
+        [Required]
         public CustomerDto Sender { get; set; }
+        [Required]
         public CustomerDto Recipient { get; set; }
+        [Required]
         public string DeliveryDetails { get; set; }
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        [Required]
+        public DateTime CreatedDate { get; set; }
     }
 }

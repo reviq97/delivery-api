@@ -17,6 +17,11 @@ namespace delivery_api.Services
             _dbContext = dbContext;
         }
 
+        public IEnumerable<Delivery> GetAllDeliveries()
+        {
+            return _dbContext.Deliveries;
+        }
+
         public Delivery GetDelivery(string deliveryId)
         {
             var delivery =_dbContext.Deliveries.FirstOrDefault(x => x.DeliveryId == deliveryId);
@@ -38,7 +43,7 @@ namespace delivery_api.Services
                 SenderMail = deliveryDto.Sender.Email,
                 RecipientMail = deliveryDto.Recipient.Email,
                 DeliveryDetails = deliveryDto.DeliveryDetails,
-                CreatedDate = deliveryDto.CreatedDate,
+                CreatedDate = DateTime.Now,
                 ArriveTime = null,
             };
 

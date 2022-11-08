@@ -12,8 +12,8 @@ using delivery_api.Repository;
 namespace delivery_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221106223350_06112022")]
-    partial class _06112022
+    [Migration("20221107211211_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

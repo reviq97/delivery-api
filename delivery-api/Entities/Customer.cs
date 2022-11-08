@@ -5,7 +5,6 @@ namespace delivery_api.Enitty
 {
     public class Customer
     {
-        private string _postalCode;
         [Required]
         [Key]
         public string CustomerId { get; set; }
@@ -22,14 +21,7 @@ namespace delivery_api.Enitty
         [Required]
         [MinLength(5)]
         [MaxLength(6)]
-        public string PostalCode
-        {
-            get { return _postalCode; }
-            set
-            {
-                _postalCode = $"{value[0]}{value[1]}-{value[2]}{value[3]}{value[4]}";
-            }
-        }
+        public string PostalCode { get; set; }
         [Required]
         public string City { get; set; }
 
