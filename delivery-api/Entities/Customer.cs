@@ -7,7 +7,7 @@ namespace delivery_api.Enitty
     {
         [Required]
         [Key]
-        public string CustomerId { get; set; }
+        public long CustomerId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

@@ -24,8 +24,11 @@ namespace delivery_api.Migrations
 
             modelBuilder.Entity("delivery_api.Enitty.Courier", b =>
                 {
-                    b.Property<string>("CourierId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("CourierId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("CourierId"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -46,8 +49,11 @@ namespace delivery_api.Migrations
 
             modelBuilder.Entity("delivery_api.Enitty.Customer", b =>
                 {
-                    b.Property<string>("CustomerId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("CustomerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("CustomerId"), 1L, 1);
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -87,8 +93,8 @@ namespace delivery_api.Migrations
                     b.Property<DateTime?>("ArriveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CourierId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("CourierId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");

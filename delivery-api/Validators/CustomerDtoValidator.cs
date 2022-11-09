@@ -21,6 +21,7 @@ namespace delivery_api.Validators
                     {
                         fail.AddFailure("PostalCode", $"Should have exactly 6 characters, already has {postalCode.Length}");
                     }
+
                 });
         }
     }

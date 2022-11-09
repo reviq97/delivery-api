@@ -39,15 +39,12 @@ namespace delivery_api.Services
             var delivery = new Delivery()
             {
                 DeliveryId = Guid.NewGuid().ToString(),
-                CourierId = null,
                 SenderMail = deliveryDto.Sender.Email,
                 RecipientMail = deliveryDto.Recipient.Email,
                 DeliveryDetails = deliveryDto.DeliveryDetails,
                 CreatedDate = DateTime.Now,
                 ArriveTime = null,
             };
-
-            _dbContext.Deliveries.Add(delivery);
 
             var sender = deliveryDto.Sender.Email;
             var recipient = deliveryDto.Recipient.Email;
@@ -62,6 +59,7 @@ namespace delivery_api.Services
                 _customerService.PostCustomer(deliveryDto.Recipient);
             }
 
+            _dbContext.Deliveries.Add(delivery);
             _dbContext.SaveChanges();
             return delivery;
             

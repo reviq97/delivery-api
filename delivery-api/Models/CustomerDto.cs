@@ -18,6 +18,10 @@ namespace delivery_api.Models
                 {
                     _postalCode = "00-000";
                 }
+                else if (value.Contains("-"))
+                {
+                    _postalCode = value;
+                }
                 else if (value.StartsWith("0"))
                 {
                     var parsedValue = Convert.ToInt64(value.Insert(0, "1"));

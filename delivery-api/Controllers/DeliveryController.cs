@@ -36,7 +36,6 @@ namespace delivery_api.Controllers
 
             return Ok(deliveries.Select(x => new Delivery
             {
-                CourierId = x.CourierId,
                 SenderMail = x.SenderMail,
                 RecipientMail = x.RecipientMail,
                 CreatedDate = x.CreatedDate,

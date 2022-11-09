@@ -1,12 +1,12 @@
 ﻿using delivery_api.Enitty;
-using delivery_api.Entities;
+using delivery_api.Models;
 
 namespace delivery_api.Services.Interfaces
 {
     public interface ICourierService
     {
         Courier GetCourier(string courierPesel);
-        Courier CreateCourier(Courier courier);
-        CourierDeliveries GetCourierDeliveries(string courierId);
+        Courier CreateCourier(CourierDto courier);
+        object GetCourierDeliveries(long courierId);
     }
 }

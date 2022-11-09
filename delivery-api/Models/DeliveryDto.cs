@@ -9,9 +9,11 @@ namespace delivery_api.Models
         public CustomerDto Sender { get; set; }
         [Required]
         public CustomerDto Recipient { get; set; }
+        public string DeliveryId { get; set; }
         [Required]
         public string DeliveryDetails { get; set; }
         [Required]
-        public DateTime CreatedDate { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime? Arrive { get; set; }
     }
 }

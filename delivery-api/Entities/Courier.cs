@@ -2,11 +2,12 @@
 
 namespace delivery_api.Enitty
 {
+    
     public class Courier
     {
         [Required]
         [Key]
-        public string CourierId { get; set; }
+        public long CourierId { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         [MaxLength(11)]

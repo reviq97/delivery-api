@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace delivery_api.Migrations
 {
-    public partial class init : Migration
+    public partial class newinit2022 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,8 @@ namespace delivery_api.Migrations
                 name: "Couriers",
                 columns: table => new
                 {
-                    CourierId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CourierId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PESEL = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -27,7 +28,8 @@ namespace delivery_api.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CustomerId = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -45,12 +47,12 @@ namespace delivery_api.Migrations
                 columns: table => new
                 {
                     DeliveryId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CourierId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SenderMail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RecipientMail = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeliveryDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ArriveTime = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ArriveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CourierId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {

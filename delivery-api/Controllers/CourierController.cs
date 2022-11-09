@@ -1,5 +1,5 @@
 ﻿using delivery_api.Enitty;
-using delivery_api.Entities;
+using delivery_api.Models;
 using delivery_api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +19,7 @@ namespace delivery_api.Controllers
         }
 
         [HttpGet]
+        [Route("id")]
         public ActionResult GetCourierByPesel([FromQuery] string pesel)
         {
             var courier = _courierService.GetCourier(pesel);
@@ -27,19 +28,21 @@ namespace delivery_api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<CourierDeliveries> GetCourierDeliveries([FromQuery] string courierId)
+        [Route("delivery")]
+        public ActionResult<object> GetCourierDeliveries([FromQuery] long courierId)
         {
             var courierDeliveries = _courierService.GetCourierDeliveries(courierId);
 
             return courierDeliveries;
         }
 
-        // TODO: Finish controller, then test GetCourierDeliveries, seed some deliveries with same courier id
-        /*[HttpPost]
-        public ActionResult CreateCourier([FromBody] Courier courier)
+        [HttpPost]
+        public ActionResult CreateCourier([FromBody] CourierDto courierDto)
         {
+            var courier = _courierService.CreateCourier(courierDto);
 
-        }*/
+            return Ok(courier);
+        }
 
     }
 }

@@ -37,7 +37,6 @@ namespace delivery_api.Services
 
             var newCustomer = new Customer()
             {
-                CustomerId = Guid.NewGuid().ToString(),
                 Name = customerDto.Name,
                 Surname = customerDto.Surname,
                 City = customerDto.City,
