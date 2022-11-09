@@ -26,7 +26,7 @@ namespace delivery_api.Services
             return customer;
         }
 
-        public void PostCustomer(CustomerDto customerDto)
+        public void CreateCustomer(CustomerDto customerDto)
         {
             var customer = _dbContext.Customers.FirstOrDefault(x => x.Email == customerDto.Email);
 
@@ -48,6 +48,24 @@ namespace delivery_api.Services
             _dbContext.Customers.Add(newCustomer);
             _dbContext.SaveChanges();
 
+        }
+
+        public IEnumerable<Customer> GetAllCustomers()
+        {
+            return _dbContext.Customers.AsEnumerable();
+        }
+
+        public void DeleteCustomer(long customerId)
+        {
+            var customer = _dbContext.Customers.FirstOrDefault(x => x.CustomerId == customerId);
+
+            if(customer is null)
+            {
+                throw new Exception("Customer not found");
+            }
+
+            _dbContext.Customers.Remove(customer);
+            _dbContext.SaveChanges();
         }
     }
 }

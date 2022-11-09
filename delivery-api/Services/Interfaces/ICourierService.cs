@@ -8,5 +8,7 @@ namespace delivery_api.Services.Interfaces
         Courier GetCourier(string courierPesel);
         Courier CreateCourier(CourierDto courier);
         object GetCourierDeliveries(long courierId);
+        void AssignCourierToDelivery(long courierId, string deliveryId);
+        void DeleteCourier(long courierId);
     }
 }

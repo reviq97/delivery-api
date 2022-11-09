@@ -21,7 +21,17 @@ namespace delivery_api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<Customer> GetCustomerByMail([FromQuery]string mail)
+        [Route("getAllCustomers")]
+        public ActionResult<IEnumerable<Customer>> GetAllCustomers()
+        {
+            var customers = _customerService.GetAllCustomers();
+
+            return Ok(customers);
+        }
+
+        [HttpGet]
+        [Route("getCustomerByMail")]
+        public ActionResult<Customer> GetCustomerByMail([FromQuery] string mail)
         {
             var customer = _customerService.GetCustomerByMail(mail);
 
@@ -31,11 +41,21 @@ namespace delivery_api.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostCustomer([FromBody] CustomerDto customer)
+        [Route("createCustomer")]
+        public ActionResult CreateCustomer([FromBody] CustomerDto customer)
         {
-            _customerService.PostCustomer(customer);
+            _customerService.CreateCustomer(customer);
 
             return Created(string.Empty, customer);
+        }
+
+        [HttpDelete]
+        [Route("deleteCustomer")]
+        public ActionResult DeleteCustomer([FromQuery] long customerId)
+        {
+            _customerService.DeleteCustomer(customerId);
+
+            return NoContent();
         }
     }
 }

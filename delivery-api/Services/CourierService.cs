@@ -48,10 +48,6 @@ namespace delivery_api.Services
 
         public object GetCourierDeliveries(long courierId)
         {
-            var courierDeliveries = _dbContext.Deliveries.Where(x => x.CourierId == courierId);
-
-            var result = courierDeliveries.Select(x => new { Sender = x.SenderMail, Recipient = x.RecipientMail });
-
             var query = from d in _dbContext.Deliveries
                     join e in _dbContext.Customers
                     on d.RecipientMail equals e.Email
@@ -87,6 +83,34 @@ namespace delivery_api.Services
             // Cast to created data type
 
             return query.ToList();
+        }
+
+        public void AssignCourierToDelivery(long courierId, string deliveryId)
+        {
+            var delivery = _dbContext.Deliveries.FirstOrDefault(x => x.DeliveryId == deliveryId);
+
+            if (delivery is null)
+            {
+                throw new Exception("Delivery not found");
+            }
+
+            delivery.CourierId = courierId;
+
+            _dbContext.Deliveries.Update(delivery);
+            _dbContext.SaveChanges();
+        }
+
+        public void DeleteCourier(long courierId)
+        {
+            var courier = _dbContext.Couriers.FirstOrDefault(x => x.CourierId == courierId);
+
+            if (courier is null)
+            {
+                throw new Exception("Courier not found");
+            }
+
+            _dbContext.Couriers.Remove(courier);
+            _dbContext.SaveChanges();
         }
     }
 }

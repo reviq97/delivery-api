@@ -19,7 +19,7 @@ namespace delivery_api.Controllers
         }
 
         [HttpGet]
-        [Route("id")]
+        [Route("getDeliveryById")]
         public ActionResult<Delivery> GetDeliveryById([FromQuery]string deliveryId)
         {
             var delivery = _deliveryService.GetDelivery(deliveryId);
@@ -30,30 +30,50 @@ namespace delivery_api.Controllers
         }
 
         [HttpGet]
+        [Route("getAllDeliveries")]
         public ActionResult<IEnumerable<Delivery>> GetAllDeliveries()
         {
             var deliveries = _deliveryService.GetAllDeliveries();
 
-            return Ok(deliveries.Select(x => new Delivery
-            {
-                SenderMail = x.SenderMail,
-                RecipientMail = x.RecipientMail,
-                CreatedDate = x.CreatedDate,
-                ArriveTime = x.ArriveTime,
-                DeliveryDetails = x.DeliveryDetails,
-                DeliveryId = x.DeliveryId
-            }) ?? Enumerable.Empty<Delivery>());
+            return Ok(deliveries);
         }
 
         [HttpPost]
-        public ActionResult PostDelivery([FromBody] DeliveryDto deliveryDto)
+        [Route("createDelivery")]
+        public ActionResult CreateDelivery([FromBody] PostDeliveryDto deliveryDto)
         {
-
-            var delivery = _deliveryService.PostDelivery(deliveryDto);
+            var delivery = _deliveryService.CreateDelivery(deliveryDto);
 
             return Created(string.Empty, delivery);
         }
 
+        [HttpGet]
+        [Route("getDeliveryDetails")]
+        public ActionResult<object> GetDeliveryDetails([FromQuery] string deliveryId)
+        {
+            var deliveryDetails = _deliveryService.GetDeliveryDetails(deliveryId);
+
+            return Ok(deliveryDetails);
+        }
+
         
+
+        [HttpPatch]
+        [Route("assignArrivalDateToDelivery")]
+        public ActionResult AssignArrivalDateToDelivery([FromQuery] DateTime arrivalDate, [FromQuery] string deliveryId)
+        {
+            _deliveryService.AssignArrivalDate(arrivalDate, deliveryId);
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        [Route("deleteDelivery")]
+        public ActionResult DeleteDelivery([FromQuery] string deliveryId)
+        {
+            _deliveryService.DeleteDelivery(deliveryId);
+
+            return NoContent();
+        }
     }
 }

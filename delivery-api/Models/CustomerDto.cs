@@ -13,8 +13,9 @@ namespace delivery_api.Models
         public string PostalCode
         {
             get { return _postalCode; }
-            set {
-                if(value.Length < 6)
+            set 
+            {
+                if(value.Length < 5)
                 {
                     _postalCode = "00-000";
                 }

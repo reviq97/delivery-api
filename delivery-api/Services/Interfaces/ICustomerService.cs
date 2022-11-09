@@ -6,7 +6,8 @@ namespace delivery_api.Services.Interfaces
     public interface ICustomerService
     {
         Customer GetCustomerByMail(string mail);
-        void PostCustomer(CustomerDto customer);
-
+        void CreateCustomer(CustomerDto customer);
+        IEnumerable<Customer> GetAllCustomers();
+        void DeleteCustomer(long customerId);
     }
 }

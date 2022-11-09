@@ -17,7 +17,7 @@ namespace delivery_api.Enitty
         public DateTime CreatedDate { get; set; } 
         public DateTime? ArriveTime { get; set; }
 
-        public long CourierId { get; set; }
+        public long? CourierId { get; set; }
 
     }
 }

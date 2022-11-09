@@ -19,7 +19,7 @@ namespace delivery_api.Controllers
         }
 
         [HttpGet]
-        [Route("id")]
+        [Route("getCourierByPesel")]
         public ActionResult GetCourierByPesel([FromQuery] string pesel)
         {
             var courier = _courierService.GetCourier(pesel);
@@ -28,7 +28,7 @@ namespace delivery_api.Controllers
         }
 
         [HttpGet]
-        [Route("delivery")]
+        [Route("getCourierAllDeliveries")]
         public ActionResult<object> GetCourierDeliveries([FromQuery] long courierId)
         {
             var courierDeliveries = _courierService.GetCourierDeliveries(courierId);
@@ -37,11 +37,30 @@ namespace delivery_api.Controllers
         }
 
         [HttpPost]
+        [Route("createCourier")]
         public ActionResult CreateCourier([FromBody] CourierDto courierDto)
         {
             var courier = _courierService.CreateCourier(courierDto);
 
             return Ok(courier);
+        }
+
+        [HttpPatch]
+        [Route("assignCourierToDelivery")]
+        public ActionResult AssignCourierToDelivery([FromQuery] long courierId, [FromQuery] string deliveryId)
+        {
+            _courierService.AssignCourierToDelivery(courierId, deliveryId);
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        [Route("deleteCourier")]
+        public ActionResult DeleteCourier([FromQuery] long courierId)
+        {
+            _courierService.DeleteCourier(courierId);
+
+            return NoContent();
         }
 
     }
