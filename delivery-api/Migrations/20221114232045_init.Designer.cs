@@ -12,8 +12,8 @@ using delivery_api.Repository;
 namespace delivery_api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221109123516_newinit2022")]
-    partial class newinit2022
+    [Migration("20221114232045_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,7 +95,7 @@ namespace delivery_api.Migrations
                     b.Property<DateTime?>("ArriveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("CourierId")
+                    b.Property<long?>("CourierId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedDate")

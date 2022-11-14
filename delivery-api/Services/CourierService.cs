@@ -1,4 +1,5 @@
 ﻿using delivery_api.Enitty;
+using delivery_api.Middleware.CustomApiHandlingMiddleware;
 using delivery_api.Models;
 using delivery_api.Repository;
 using delivery_api.Services.Interfaces;
@@ -23,7 +24,7 @@ namespace delivery_api.Services
                 return courier;
             }
 
-            throw new Exception("Courier not found");
+            throw new NotFoundException("Courier not found");
         }
 
         public Courier CreateCourier(CourierDto courierDto)
@@ -42,7 +43,7 @@ namespace delivery_api.Services
                 return courier;
             }
 
-            throw new Exception("Courier already exists in database");
+            throw new NotFoundException("Courier already exists in database");
 
         }
 
@@ -80,7 +81,6 @@ namespace delivery_api.Services
                         Created = d.CreatedDate,
                     };
 
-            // Cast to created data type
 
             return query.ToList();
         }
@@ -91,7 +91,7 @@ namespace delivery_api.Services
 
             if (delivery is null)
             {
-                throw new Exception("Delivery not found");
+                throw new NotFoundException("Delivery not found");
             }
 
             delivery.CourierId = courierId;
@@ -106,7 +106,7 @@ namespace delivery_api.Services
 
             if (courier is null)
             {
-                throw new Exception("Courier not found");
+                throw new NotFoundException("Courier not found");
             }
 
             _dbContext.Couriers.Remove(courier);

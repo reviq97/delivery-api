@@ -93,7 +93,7 @@ namespace delivery_api.Migrations
                     b.Property<DateTime?>("ArriveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("CourierId")
+                    b.Property<long?>("CourierId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedDate")

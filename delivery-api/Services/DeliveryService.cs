@@ -1,4 +1,5 @@
 ﻿using delivery_api.Enitty;
+using delivery_api.Middleware.CustomApiHandlingMiddleware;
 using delivery_api.Models;
 using delivery_api.Repository;
 using delivery_api.Services.Interfaces;
@@ -31,7 +32,7 @@ namespace delivery_api.Services
                 return delivery;
             }
 
-            throw new Exception("Delivery not found");
+            throw new NotFoundException("Delivery not found");
         }
 
         public Delivery CreateDelivery(PostDeliveryDto deliveryDto)
@@ -71,7 +72,7 @@ namespace delivery_api.Services
 
             if(delivery is null)
             {
-                throw new Exception("Delivery not found");
+                throw new NotFoundException("Delivery not found");
             }
 
             var query = from d in _dbContext.Deliveries
@@ -122,7 +123,7 @@ namespace delivery_api.Services
 
             if (delivery is null)
             {
-                throw new Exception("Delivery not found");
+                throw new NotFoundException("Delivery not found");
             }
 
             delivery.ArriveTime = DateTime.Parse(arrivalDate.ToString("yyyy-MM-dd"));
@@ -137,7 +138,7 @@ namespace delivery_api.Services
 
             if(delivery is null)
             {
-                throw new Exception("Delivery not found");
+                throw new NotFoundException("Delivery not found");
             }
 
             _dbContext.Deliveries.Remove(delivery);

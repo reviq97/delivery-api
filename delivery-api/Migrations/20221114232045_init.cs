@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace delivery_api.Migrations
 {
-    public partial class newinit2022 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,7 +52,7 @@ namespace delivery_api.Migrations
                     DeliveryDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ArriveTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CourierId = table.Column<long>(type: "bigint", nullable: false)
+                    CourierId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {

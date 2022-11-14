@@ -35,8 +35,6 @@ namespace delivery_api.Controllers
         {
             var customer = _customerService.GetCustomerByMail(mail);
 
-            if (customer is null) return NotFound("There isn't such customer with given customer id");
-
             return Ok(customer);
         }
 

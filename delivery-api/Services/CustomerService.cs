@@ -1,4 +1,5 @@
 ﻿using delivery_api.Enitty;
+using delivery_api.Middleware.CustomApiHandlingMiddleware;
 using delivery_api.Models;
 using delivery_api.Repository;
 using delivery_api.Services.Interfaces;
@@ -20,7 +21,7 @@ namespace delivery_api.Services
 
             if(customer is null)
             {
-                throw new Exception("Customer not found with given mail");
+                throw new NotFoundException("Customer not found with given mail");
             }
 
             return customer;
@@ -32,7 +33,7 @@ namespace delivery_api.Services
 
             if (customer is not null)
             {
-                throw new Exception("Customer already exists");
+                throw new EntityExistsException("Customer already exists");
             }
 
             var newCustomer = new Customer()
@@ -61,7 +62,7 @@ namespace delivery_api.Services
 
             if(customer is null)
             {
-                throw new Exception("Customer not found");
+                throw new NotFoundException("Customer not found");
             }
 
             _dbContext.Customers.Remove(customer);
