@@ -1,3 +1,4 @@
+using delivery_api.Middleware;
 using delivery_api.Models;
 using delivery_api.Repository;
 using delivery_api.Services;
@@ -22,6 +23,7 @@ builder.Services.AddScoped<IValidator<DeliveryDto>, DeliveryDtoValidator>();
 builder.Services.AddScoped<IDeliveryService, DeliveryService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<ICourierService, CourierService>();
+builder.Services.AddScoped<ErrorHandlingMiddleware>();
 
 
 builder.Services.AddSwaggerGen();
@@ -35,6 +37,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

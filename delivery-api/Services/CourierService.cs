@@ -103,6 +103,7 @@ namespace delivery_api.Services
         public void DeleteCourier(long courierId)
         {
             var courier = _dbContext.Couriers.FirstOrDefault(x => x.CourierId == courierId);
+            var deliveries = _dbContext.Deliveries.Where(x => x.CourierId == courierId).ToList();
 
             if (courier is null)
             {
@@ -110,6 +111,16 @@ namespace delivery_api.Services
             }
 
             _dbContext.Couriers.Remove(courier);
+
+            if(deliveries.Count > 0)
+            {
+                foreach (var item in deliveries)
+                {
+                    item.CourierId = 0;
+                    _dbContext.Deliveries.Update(item);
+                }
+            }
+
             _dbContext.SaveChanges();
         }
     }
